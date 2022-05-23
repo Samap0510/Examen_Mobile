@@ -172,7 +172,6 @@
         android:layout_marginTop="20dp"
         android:text="También puedes registrarte con:"
         android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/lblRegister"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -183,5 +182,5 @@
         android:layout_below="@id/textView12"
         android:layout_marginStart="170dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/google" />
+        android:background="@drawable/R_google" />
 </RelativeLayout>
