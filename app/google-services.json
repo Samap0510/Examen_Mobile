@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "397166439560",
+    "project_id": "examenpractico-90fe3",
+    "storage_bucket": "examenpractico-90fe3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397166439560:android:aac51f24b598f6f65b033d",
+        "android_client_info": {
+          "package_name": "com.example.examenmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397166439560-imbjcc4epdn5udrkh2sq2vnr2h709bqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzCRd1ACxazwweebb_EN2JUJbIsXPuwvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397166439560-imbjcc4epdn5udrkh2sq2vnr2h709bqg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
