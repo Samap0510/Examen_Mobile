@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
+    private ImageView imgNoInternet;
+    private Button btnReconectar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,18 @@ public class MainActivity extends AppCompatActivity {
 
         this.auth = FirebaseAuth.getInstance();
 
+        imgNoInternet = findViewById(R.id.imageViewNoInternet);
+        btnReconectar = findViewById(R.id.buttonReconectar);
+
+        imgNoInternet.setVisibility(View.INVISIBLE);
+        btnReconectar.setVisibility(View.INVISIBLE);
+
+        btnReconectar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onStart();
+            }
+        });
     }
 
 
@@ -51,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if (internetAuth==true) {
+        if (internetAuth) {
 
 
             if (user == null) {
@@ -66,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
         }else{
             // en este else deberia de mandar un mensaje de que no esta conectado a internet y que deberia de conectarse o
             // si el usuario quiere utilizar datos
-            Toast.makeText(this, "Revise su conección a INTERNET", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Revise su conección a INTERNET", Toast.LENGTH_LONG).show();
+            imgNoInternet.setVisibility(View.VISIBLE);
+            btnReconectar.setVisibility(View.VISIBLE);
 
         }
     }

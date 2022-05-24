@@ -3,7 +3,10 @@ package com.example.examenmobile;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,14 +43,27 @@ public class Login extends AppCompatActivity {
 
         this.auth = FirebaseAuth.getInstance();
 
+        //En la acción de CADA botón, se hace un IF con la intencion de que valide la conectividad
+        //si el metodo validarConexion es true, continua con su acción
+        //En caso de ser false, retorna al MainActivity
         this.btnlogin.setOnClickListener(view -> {
-            userLogin();
+            if(validarConexion()){
+                userLogin();
+            }else{
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+            }
         });
 
         this.lblRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openRegisterActivity();
+                if(validarConexion()){
+                    openRegisterActivity();
+                }else{
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -85,5 +101,19 @@ public class Login extends AppCompatActivity {
     private void openRegisterActivity(){
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    private boolean validarConexion(){
+        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+        //Valida si hay coneccion a internet y muestra el mensaje respectivo
+        if(networkInfo != null && networkInfo.isConnected()){
+            //Conectado a internet
+            return true;
+        }else{
+            //SIN conexión a Internet
+            return false;
+        }
     }
 }
