@@ -73,21 +73,31 @@ public class Login extends AppCompatActivity {
         String mail = this.textemail.getText().toString();
         String password = this.textpassword.getEditText().getText().toString();
 
+
+
         if (TextUtils.isEmpty(mail)){
 
             textemail.setError("Ingrese un correo");
             textemail.requestFocus();
 
 
-        }else if (TextUtils.isEmpty(password)){
+        }else if (TextUtils.isEmpty(password)) {
 
+            Toast.makeText(Login.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
+            textpassword.requestFocus();
+        }else{
             auth.signInWithEmailAndPassword(mail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                 public void onComplete(@NonNull Task<AuthResult> task){
                     if (task.isSuccessful()){
-                        Toast.makeText(Login.this,"Bienvenido",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this,"Bienvenido",Toast.LENGTH_SHORT).show();
+
 
                         //se activa este pedazo de codigo cuando la actividad DashBoard este construida
                         //startActivity(new Intent(Login.this,DashBoard.class));
+                    }else{
+
+                        Toast.makeText(Login.this,"El usuario no existe",Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
