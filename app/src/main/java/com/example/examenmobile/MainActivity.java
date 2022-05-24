@@ -38,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
         if (internetAuth==true) {
 
 
+
             if (user == null) {
                 startActivity(new Intent(MainActivity.this, Login.class));
 
             } else {
+
+                startActivity(new Intent(MainActivity.this, Login.class));
                 // este else funcionara cuando se cree la actividad Dasboard, este else sirve para cuando el usuario esta logueado
                 // ingrese directamente a el menu principal
                 // startActivity(new Intent(MainActivity.this, Dasboard.clas));
