@@ -182,5 +182,5 @@
         android:layout_below="@id/textView12"
         android:layout_marginStart="170dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/R_google" />
+        android:background="@drawable/rgoogle" />
 </RelativeLayout>
