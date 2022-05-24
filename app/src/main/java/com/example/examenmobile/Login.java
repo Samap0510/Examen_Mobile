@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +54,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void userLogin(){
-
         String mail = this.textemail.getText().toString();
         String password = this.textpassword.getEditText().getText().toString();
 
@@ -76,15 +76,14 @@ public class Login extends AppCompatActivity {
                 }
             });
 
+        }else{
+            Intent intentMenu = new Intent(Login.this,MainMenu.class);
+            startActivity(intentMenu);
         }
-
-
     }
 
     private void openRegisterActivity(){
-
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-
     }
 }
