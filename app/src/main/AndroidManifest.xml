@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExamenMobile"
         tools:targetApi="31">
+        <activity android:name=".Login"
+            android:exported="true" />
+        <activity android:name=".RegisterActivity"
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
