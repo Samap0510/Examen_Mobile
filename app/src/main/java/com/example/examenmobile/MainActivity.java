@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser user = auth.getCurrentUser();
         System.out.println(user);
-        boolean internetAuth = true;
+        boolean verificarInternet = true;
 
-        // Jeison debera en esta parte hacer la verificacion del internet y darle un valor a la variable internetAuth
+        // Jeison debera en esta parte hacer la verificacion del internet y darle un valor a la variable verificarInternet
         // para que ingrese al login o que mande un mensaje de error
         ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -59,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
         //Valida si hay coneccion a internet y muestra el mensaje respectivo
         if(networkInfo != null && networkInfo.isConnected()){
             //Conectado a internet
-            internetAuth = true;
+            verificarInternet = true;
         }else{
             //SIN conexión a Internet
-            internetAuth = false;
+            verificarInternet = false;
         }
 
 
-        if (internetAuth) {
+        if (verificarInternet) {
 
 
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
             } else {
 
-                startActivity(new Intent(MainActivity.this, Login.class));
+                startActivity(new Intent(MainActivity.this, MainMenu.class));
                 // este else funcionara cuando se cree la actividad Dasboard, este else sirve para cuando el usuario esta logueado
                 // ingrese directamente a el menu principal
                 // startActivity(new Intent(MainActivity.this, Dasboard.clas));

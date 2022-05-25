@@ -91,9 +91,9 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Toast.makeText(Login.this,"Bienvenido",Toast.LENGTH_SHORT).show();
 
+                        Intent intentMenu = new Intent(Login.this,MainMenu.class);
+                        startActivity(intentMenu);
 
-                        //se activa este pedazo de codigo cuando la actividad DashBoard este construida
-                        //startActivity(new Intent(Login.this,DashBoard.class));
                     }else{
 
                         Toast.makeText(Login.this,"El usuario no existe",Toast.LENGTH_SHORT).show();
@@ -102,9 +102,6 @@ public class Login extends AppCompatActivity {
                 }
             });
 
-        }else{
-            Intent intentMenu = new Intent(Login.this,MainMenu.class);
-            startActivity(intentMenu);
         }
     }
 
