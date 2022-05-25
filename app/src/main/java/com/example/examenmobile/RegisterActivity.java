@@ -63,7 +63,9 @@ public class RegisterActivity extends AppCompatActivity {
                 crearUsuario();
 
             }else{
-                Toast.makeText(RegisterActivity.this,"No hay conexión a internet",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
 
 
@@ -83,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void actividadLogin(){
 
         Intent intent = new Intent(this, Login.class);
+        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
 
@@ -143,7 +146,9 @@ public class RegisterActivity extends AppCompatActivity {
                         });
 
                         Toast.makeText(RegisterActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this , Login.class));
+                        Intent intent = new Intent(RegisterActivity.this , Login.class);
+                        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
 
                     }else{
 
