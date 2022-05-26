@@ -4,9 +4,9 @@
     package="com.example.examenmobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExamenMobile"
         tools:targetApi="31">
+        <service
+            android:name=".ServiceInternet"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".MainMenu"
             android:exported="false" />
