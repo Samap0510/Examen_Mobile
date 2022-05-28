@@ -67,11 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
         mIntentFilter.addAction(BroadCastStringForAction);
         Intent serviceIntent=new Intent(this,ServiceInternet.class);
         startService(serviceIntent);
+
         if(isOnline(getApplicationContext())){
             setVisible_ON();
         }else {
             setVisible_OFF();
         }
+
 
         bRegistrar.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){
@@ -99,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void actividadLogin(){
 
         Intent intent = new Intent(this, Login.class);
+        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
 
@@ -159,7 +162,9 @@ public class RegisterActivity extends AppCompatActivity {
                         });
 
                         Toast.makeText(RegisterActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this , Login.class));
+                        Intent intent = new Intent(RegisterActivity.this , Login.class);
+                        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
 
                     }else{
 

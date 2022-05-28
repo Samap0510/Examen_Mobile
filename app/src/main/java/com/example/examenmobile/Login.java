@@ -108,6 +108,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this,"Bienvenido",Toast.LENGTH_SHORT).show();
 
                         Intent intentMenu = new Intent(Login.this,MainMenu.class);
+                        intentMenu.addFlags(intentMenu.FLAG_ACTIVITY_CLEAR_TASK | intentMenu.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intentMenu);
 
                     }else{
@@ -123,6 +124,7 @@ public class Login extends AppCompatActivity {
 
     private void openRegisterActivity(){
         Intent intent = new Intent(this, RegisterActivity.class);
+        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -164,6 +166,7 @@ public class Login extends AppCompatActivity {
 
     public void setVisible_OFF(){
         Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
