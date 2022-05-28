@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void actividadLogin(){
 
-        //hola
+        
 
         Intent intent = new Intent(this, Login.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -165,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Toast.makeText(RegisterActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this , Login.class);
-                        
+
                         startActivity(intent);
 
                     }else{
