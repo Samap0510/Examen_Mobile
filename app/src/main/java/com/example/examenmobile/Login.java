@@ -67,15 +67,8 @@ public class Login extends AppCompatActivity {
         this.btnlogin.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){
                 userLogin();
-<<<<<<< HEAD
-            }else{
-                Intent intent = new Intent(Login.this, MainActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-=======
             }else {
                 setVisible_OFF();
->>>>>>> 0fc6c04 (Agregué la conexión a internet como servicio)
             }
         });
 
@@ -84,15 +77,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 if(isOnline(getApplicationContext())){
                     openRegisterActivity();
-<<<<<<< HEAD
-                }else{
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-=======
                 }else {
                     setVisible_OFF();
->>>>>>> 0fc6c04 (Agregué la conexión a internet como servicio)
                 }
             }
         });

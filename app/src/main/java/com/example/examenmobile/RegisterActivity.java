@@ -78,16 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
         bRegistrar.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){
                 crearUsuario();
-<<<<<<< HEAD
-
-            }else{
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-=======
             }else {
                 setVisible_OFF();
->>>>>>> 0fc6c04 (Agregué la conexión a internet como servicio)
             }
         });
 
@@ -108,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void actividadLogin(){
 
-        //hola f2
+        //hola
 
         Intent intent = new Intent(this, Login.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
