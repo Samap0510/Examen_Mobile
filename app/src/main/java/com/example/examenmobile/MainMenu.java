@@ -16,10 +16,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainMenu extends AppCompatActivity {
 
     private Button btnCerrarSesion;
     private ImageButton btnLinterna;
+    private FirebaseAuth auth;
 
     public static final String BroadCastStringForAction="checkinternet";
     private IntentFilter mIntentFilter;
@@ -28,6 +31,8 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        this.auth = FirebaseAuth.getInstance();
 
         this.btnCerrarSesion = findViewById(R.id.buttonCerrarSeasion);
         this.btnLinterna = findViewById(R.id.imgBLinterna);
@@ -54,7 +59,9 @@ public class MainMenu extends AppCompatActivity {
     }
 
     private void cerrarSesion(){
+        auth.signOut();
         Intent intentCerrarSesion = new Intent(MainMenu.this,Login.class);
+        intentCerrarSesion.addFlags(intentCerrarSesion.FLAG_ACTIVITY_CLEAR_TASK | intentCerrarSesion.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intentCerrarSesion);
     }
 

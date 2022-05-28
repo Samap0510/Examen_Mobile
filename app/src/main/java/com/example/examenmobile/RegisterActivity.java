@@ -67,11 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
         mIntentFilter.addAction(BroadCastStringForAction);
         Intent serviceIntent=new Intent(this,ServiceInternet.class);
         startService(serviceIntent);
+
         if(isOnline(getApplicationContext())){
             setVisible_ON();
         }else {
             setVisible_OFF();
         }
+
 
         bRegistrar.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){

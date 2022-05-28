@@ -180,6 +180,7 @@ public class Login extends AppCompatActivity {
 
     public void setVisible_OFF(){
         Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
