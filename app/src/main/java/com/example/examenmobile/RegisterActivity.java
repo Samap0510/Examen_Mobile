@@ -1,7 +1,9 @@
 package com.example.examenmobile;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -42,6 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private FirebaseFirestore db;
 
+    public static final String BroadCastStringForAction="checkinternet";
+    private IntentFilter mIntentFilter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,23 +63,40 @@ public class RegisterActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         db= FirebaseFirestore.getInstance();
 
+        mIntentFilter=new IntentFilter();
+        mIntentFilter.addAction(BroadCastStringForAction);
+        Intent serviceIntent=new Intent(this,ServiceInternet.class);
+        startService(serviceIntent);
+        if(isOnline(getApplicationContext())){
+            setVisible_ON();
+        }else {
+            setVisible_OFF();
+        }
+
         bRegistrar.setOnClickListener(view -> {
-            if (validarConexion()){
+            if(isOnline(getApplicationContext())){
                 crearUsuario();
+<<<<<<< HEAD
 
             }else{
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+=======
+            }else {
+                setVisible_OFF();
+>>>>>>> 0fc6c04 (Agregué la conexión a internet como servicio)
             }
-
-
         });
 
         vLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actividadLogin();
+                if(isOnline(getApplicationContext())){
+                    actividadLogin();
+                }else {
+                    setVisible_OFF();
+                }
             }
         });
 
@@ -178,5 +200,59 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    //----------------------------------------------------------------------------------------------
+    public BroadcastReceiver MyReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(BroadCastStringForAction)){
+                if(intent.getStringExtra("online_status").equals("true")){
+                    setVisible_ON();
+                }else {
+                    setVisible_OFF();
+                }
+            }
+        }
+    };
+
+    public boolean isOnline(Context c){
+        ConnectivityManager cm = (ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+        //Valida si hay coneccion a internet y muestra el mensaje respectivo
+        if(networkInfo != null && networkInfo.isConnected()){
+            //Conectado a internet
+            return true;
+        }else{
+            //SIN conexión a Internet
+            return false;
+        }
+    }
+
+    public void setVisible_ON(){
+
+    }
+
+    public void setVisible_OFF(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        registerReceiver(MyReceiver,mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(MyReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(MyReceiver,mIntentFilter);
+    }
 
 }

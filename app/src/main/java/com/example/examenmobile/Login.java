@@ -3,8 +3,10 @@ package com.example.examenmobile;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
@@ -30,6 +33,9 @@ public class Login extends AppCompatActivity {
     private TextInputLayout textpassword;
     private Button btnlogin;
     private TextView lblRegister;
+
+    public static final String BroadCastStringForAction="checkinternet";
+    private IntentFilter mIntentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,30 +47,52 @@ public class Login extends AppCompatActivity {
         this.btnlogin = findViewById(R.id.btnLogin);
         this.lblRegister = findViewById(R.id.lblRegister);
 
+
         this.auth = FirebaseAuth.getInstance();
+
+
+        mIntentFilter=new IntentFilter();
+        mIntentFilter.addAction(BroadCastStringForAction);
+        Intent serviceIntent=new Intent(this,ServiceInternet.class);
+        startService(serviceIntent);
+        if(isOnline(getApplicationContext())){
+            setVisible_ON();
+        }else {
+            setVisible_OFF();
+        }
 
         //En la acción de CADA botón, se hace un IF con la intencion de que valide la conectividad
         //si el metodo validarConexion es true, continua con su acción
         //En caso de ser false, retorna al MainActivity
         this.btnlogin.setOnClickListener(view -> {
-            if(validarConexion()){
+            if(isOnline(getApplicationContext())){
                 userLogin();
+<<<<<<< HEAD
             }else{
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+=======
+            }else {
+                setVisible_OFF();
+>>>>>>> 0fc6c04 (Agregué la conexión a internet como servicio)
             }
         });
 
         this.lblRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validarConexion()){
+                if(isOnline(getApplicationContext())){
                     openRegisterActivity();
+<<<<<<< HEAD
                 }else{
                     Intent intent = new Intent(Login.this, MainActivity.class);
                     intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+=======
+                }else {
+                    setVisible_OFF();
+>>>>>>> 0fc6c04 (Agregué la conexión a internet como servicio)
                 }
             }
         });
@@ -114,8 +142,26 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private boolean validarConexion(){
-        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+
+    //-------------------------------------------
+
+    public BroadcastReceiver MyReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(BroadCastStringForAction)){
+                if(intent.getStringExtra("online_status").equals("true")){
+                    setVisible_ON();
+                }else {
+                    setVisible_OFF();
+                }
+            }
+        }
+    };
+
+    public boolean isOnline(Context c){
+        ConnectivityManager cm = (ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 
         //Valida si hay coneccion a internet y muestra el mensaje respectivo
@@ -127,4 +173,32 @@ public class Login extends AppCompatActivity {
             return false;
         }
     }
+
+    public void setVisible_ON(){
+
+    }
+
+    public void setVisible_OFF(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        registerReceiver(MyReceiver,mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(MyReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(MyReceiver,mIntentFilter);
+    }
+
 }
