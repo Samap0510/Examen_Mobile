@@ -85,17 +85,14 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         System.out.println(user);
 
-        // Jeison debera en esta parte hacer la verificacion del internet y darle un valor a la variable verificarInternet
-        // para que ingrese al login o que mande un mensaje de error
+
 
         if (user == null) {
             startActivity(new Intent(MainActivity.this, Login.class));
 
         } else {
             startActivity(new Intent(MainActivity.this, MainMenu.class));
-            // este else funcionara cuando se cree la actividad Dasboard, este else sirve para cuando el usuario esta logueado
-            // ingrese directamente a el menu principal
-            // startActivity(new Intent(MainActivity.this, Dasboard.clas));
+
         }
 
     }
