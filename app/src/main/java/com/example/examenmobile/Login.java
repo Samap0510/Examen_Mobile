@@ -1,6 +1,7 @@
 package com.example.examenmobile;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
@@ -15,9 +16,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -33,6 +41,11 @@ public class Login extends AppCompatActivity {
     private TextInputLayout textpassword;
     private Button btnlogin;
     private TextView lblRegister;
+
+    ImageButton googleL;
+
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
 
     public static final String BroadCastStringForAction="checkinternet";
     private IntentFilter mIntentFilter;
@@ -83,13 +96,27 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Login con google
+
+        googleL = findViewById(R.id.googleR);
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc= GoogleSignIn.getClient(this, gso);
+
+        googleL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignIn();
+            }
+        });
+
     }
 
     private void userLogin(){
         String mail = this.textemail.getText().toString();
         String password = this.textpassword.getEditText().getText().toString();
-
-
 
         if (TextUtils.isEmpty(mail)){
 
@@ -128,7 +155,34 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //SignIn google
+    private void SignIn() {
 
+        Intent intent = gsc.getSignInIntent();
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==100){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                task.getResult(ApiException.class);
+                MainMenu();
+            } catch (ApiException e) {
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+    private void MainMenu() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+        startActivity(intent);
+    }
 
 
     //-------------------------------------------

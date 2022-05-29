@@ -23,6 +23,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/nosignal" />
 
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Por favor revise su conexion de internet"
+            android:textAlignment="center"
+            android:textColor="#2196F3"
+            android:textSize="28sp" />
+
         <Button
             android:id="@+id/buttonReconectar"
             android:layout_width="match_parent"

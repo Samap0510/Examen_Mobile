@@ -13,16 +13,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
                 android:layout_marginTop="30dp"
                 android:text="Registrate"
+                android:textAlignment="center"
                 android:textColor="@color/Red"
                 android:textSize="28sp" />
 
@@ -30,17 +30,17 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
                 android:layout_marginTop="6dp"
                 android:text="Completa los siguientes campos"
+                android:textAlignment="center"
                 android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/txtUser"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="30dp"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/custom_person_icon"
@@ -58,8 +58,8 @@
                 android:id="@+id/txtMail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/custom_email_icon"
@@ -78,8 +78,8 @@
                 android:id="@+id/txtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/custom_phone_icon"
@@ -98,10 +98,10 @@
                 android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
                 android:layout_below="@id/txtPhone"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:helperTextTextColor="@color/IconFocused"
@@ -126,15 +126,15 @@
                     android:paddingStart="10dp"
                     android:textColorHighlight="@color/IconFocused"
                     android:textColorLink="@color/IconFocused"
-                    android:textSize="18dp"/>
+                    android:textSize="18dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginRight="40dp"
                 android:backgroundTint="@color/btnPrimary"
                 android:text="Register"
@@ -143,63 +143,42 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btnRegister"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="15dp"
-                android:text="¿Ya tienes cuenta?"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/lblRegister"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/loguear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btnRegister"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="50dp"
-                android:text="Logueate"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                tools:ignore="MissingConstraints" />
-
-        </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView12"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textView10"
-                android:textAlignment="center"
-                android:layout_marginTop="20dp"
-                android:text="También puedes registrarte con:"
-                android:textSize="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints" />
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/googleR"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/rgoogle" />
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnRegister"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="15dp"
+                    android:text="¿Ya tienes cuenta?"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toStartOf="@+id/lblRegister"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="MissingConstraints" />
 
+                <TextView
+                    android:id="@+id/loguear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnRegister"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="Logueate"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/textView10"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
