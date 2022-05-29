@@ -100,6 +100,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void actividadLogin(){
 
+        
+
         Intent intent = new Intent(this, Login.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
