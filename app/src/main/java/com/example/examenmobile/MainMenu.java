@@ -1,5 +1,6 @@
 package com.example.examenmobile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
@@ -15,7 +16,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu extends AppCompatActivity {
@@ -23,6 +31,11 @@ public class MainMenu extends AppCompatActivity {
     private Button btnCerrarSesion;
     private ImageButton btnLinterna;
     private FirebaseAuth auth;
+
+    TextView name, email;
+
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
 
     public static final String BroadCastStringForAction="checkinternet";
     private IntentFilter mIntentFilter;
@@ -47,9 +60,28 @@ public class MainMenu extends AppCompatActivity {
             setVisible_OFF();
         }
 
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc= GoogleSignIn.getClient(this, gso);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account!=null){
+            String Name = account.getDisplayName();
+            String Email = account.getEmail();
+
+            name.setText(Name);
+            email.setText(Email);
+        }
+
         this.btnCerrarSesion.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){
                 cerrarSesion();
+                SignOut();
             }else {
                 setVisible_OFF();
             }
@@ -63,6 +95,16 @@ public class MainMenu extends AppCompatActivity {
         Intent intentCerrarSesion = new Intent(MainMenu.this,Login.class);
         intentCerrarSesion.addFlags(intentCerrarSesion.FLAG_ACTIVITY_CLEAR_TASK | intentCerrarSesion.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intentCerrarSesion);
+    }
+
+    private void SignOut() {
+        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
     }
 
     private void linterna(){

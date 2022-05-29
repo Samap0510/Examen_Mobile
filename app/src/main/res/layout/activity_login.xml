@@ -8,7 +8,7 @@ tools:context=".Login">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="710dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,8 +129,8 @@ tools:context=".Login">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
+                android:layout_height="56dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -154,14 +154,38 @@ tools:context=".Login">
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:text="Registrate"
-                    android:textStyle="bold"
                     android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="193dp"
+                    android:layout_height="match_parent"
+                    android:text="También puedes usar:"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="MissingConstraints" />
 
+                <ImageButton
+                    android:id="@+id/googleR"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/rgoogle" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 
 
 </RelativeLayout>
