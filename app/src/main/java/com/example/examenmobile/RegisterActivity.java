@@ -182,19 +182,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private boolean validarConexion(){
-        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-
-        //Valida si hay coneccion a internet y muestra el mensaje respectivo
-        if(networkInfo != null && networkInfo.isConnected()){
-            //Conectado a internet
-            return true;
-        }else{
-            //SIN conexión a Internet
-            return false;
-        }
-    }
+    
 
     //----------------------------------------------------------------------------------------------
     public BroadcastReceiver MyReceiver = new BroadcastReceiver() {
