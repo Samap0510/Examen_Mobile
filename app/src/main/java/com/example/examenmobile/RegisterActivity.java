@@ -165,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Toast.makeText(RegisterActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this , Login.class);
-
+                        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
                     }else{
