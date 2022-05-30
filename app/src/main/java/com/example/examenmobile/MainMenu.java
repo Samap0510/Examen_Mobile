@@ -125,8 +125,6 @@ public class MainMenu extends AppCompatActivity {
 
         }
 
-
-
         this.btnCerrarSesion.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){
                 if(valor.equals("true")){
@@ -134,8 +132,6 @@ public class MainMenu extends AppCompatActivity {
                 }else{
                     cerrarSesion();
                 }
-
-
             }else {
                 setVisible_OFF();
             }
