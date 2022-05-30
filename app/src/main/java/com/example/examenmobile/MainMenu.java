@@ -101,11 +101,7 @@ public class MainMenu extends AppCompatActivity {
 
         }else{
 
-           // Query query = mFirestore.collection("users");
-            String hola = "hola1";
-            nombre.setText(hola.toString());
-            System.out.println("hola ");
-            Toast.makeText(MainMenu.this,"Hola1",Toast.LENGTH_SHORT).show();
+
 
             mFirestore.collection("users")
                     .whereEqualTo("Correo", correo.toString())
@@ -129,8 +125,6 @@ public class MainMenu extends AppCompatActivity {
 
         }
 
-        String hola = "hola3";
-        //nombre.setText(hola.toString());
 
 
         this.btnCerrarSesion.setOnClickListener(view -> {
