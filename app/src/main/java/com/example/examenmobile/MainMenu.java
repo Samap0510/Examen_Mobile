@@ -95,14 +95,7 @@ public class MainMenu extends AppCompatActivity {
                 nombre.setText(Name);
                 email.setText(Email);
             }
-
-
-
-
         }else{
-
-
-
             mFirestore.collection("users")
                     .whereEqualTo("Correo", correo.toString())
                     .get()
@@ -120,9 +113,6 @@ public class MainMenu extends AppCompatActivity {
                             }
                         }
                     });
-
-
-
         }
 
         this.btnCerrarSesion.setOnClickListener(view -> {
