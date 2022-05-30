@@ -97,13 +97,17 @@ public class Login extends AppCompatActivity {
         });
 
         //Login con google
-
         googleL = findViewById(R.id.googleR);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
         gsc= GoogleSignIn.getClient(this, gso);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account!=null){
+            MainMenu();
+        }
 
         googleL.setOnClickListener(new View.OnClickListener() {
             @Override
