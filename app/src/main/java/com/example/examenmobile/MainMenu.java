@@ -129,10 +129,9 @@ public class MainMenu extends AppCompatActivity {
 
         this.btnCerrarSesion.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){
-                if(valor.equals(true)){
+                if(valor.equals("true")){
                     SignOut();
                 }else{
-
                     cerrarSesion();
                 }
 
