@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         imgNoInternet.setVisibility(View.INVISIBLE);
         btnReconectar.setVisibility(View.INVISIBLE);
         FirebaseUser user = auth.getCurrentUser();
-        System.out.println(user);
+        
 
 
 

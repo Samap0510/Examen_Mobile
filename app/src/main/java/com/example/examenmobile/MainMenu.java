@@ -13,10 +13,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -25,14 +28,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainMenu extends AppCompatActivity {
 
     private Button btnCerrarSesion;
     private ImageButton btnLinterna;
     private FirebaseAuth auth;
+    private FirebaseFirestore mFirestore;
 
-    TextView name, email;
+    TextView nombre, email;
 
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -44,6 +55,7 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        mFirestore = FirebaseFirestore.getInstance();
 
         this.auth = FirebaseAuth.getInstance();
 
@@ -60,28 +72,70 @@ public class MainMenu extends AppCompatActivity {
             setVisible_OFF();
         }
 
-        name = findViewById(R.id.name);
+        nombre = findViewById(R.id.name);
         email = findViewById(R.id.email);
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+        Bundle recibo = getIntent().getExtras();
+        String valor = recibo.getString("valor");
+        String correo = recibo.getString("email");
 
-        gsc= GoogleSignIn.getClient(this, gso);
+        if(valor.equals("true")){
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account!=null){
-            String Name = account.getDisplayName();
-            String Email = account.getEmail();
+            gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
 
-            name.setText(Name);
-            email.setText(Email);
+            gsc= GoogleSignIn.getClient(this, gso);
+
+            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+            if (account!=null){
+                String Name = account.getDisplayName();
+                String Email = account.getEmail();
+
+                nombre.setText(Name);
+                email.setText(Email);
+            }
+
+
+
+
+        }else{
+
+
+
+            mFirestore.collection("users")
+                    .whereEqualTo("Correo", correo.toString())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    nombre.setText(document.getString("Nombre"));
+                                    email.setText(document.getString("Correo"));
+                                }
+
+                            } else {
+                                Log.d("TAG", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+
+
+
         }
+
+
 
         this.btnCerrarSesion.setOnClickListener(view -> {
             if(isOnline(getApplicationContext())){
-                cerrarSesion();
-                SignOut();
+                if(valor.equals("true")){
+                    SignOut();
+                }else{
+                    cerrarSesion();
+                }
+
+
             }else {
                 setVisible_OFF();
             }
