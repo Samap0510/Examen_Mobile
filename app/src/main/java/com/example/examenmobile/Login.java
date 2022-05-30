@@ -68,6 +68,7 @@ public class Login extends AppCompatActivity {
         mIntentFilter.addAction(BroadCastStringForAction);
         Intent serviceIntent=new Intent(this,ServiceInternet.class);
         startService(serviceIntent);
+
         if(isOnline(getApplicationContext())){
             setVisible_ON();
         }else {
@@ -138,8 +139,16 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Toast.makeText(Login.this,"Bienvenido",Toast.LENGTH_SHORT).show();
 
+
+
                         Intent intentMenu = new Intent(Login.this,MainMenu.class);
                         intentMenu.addFlags(intentMenu.FLAG_ACTIVITY_CLEAR_TASK | intentMenu.FLAG_ACTIVITY_CLEAR_TOP);
+                        Bundle datos = new Bundle();
+                        String valor = "false";
+
+                        datos.putString("valor",valor.toString());
+                        datos.putString("email",textemail.getText().toString());
+                        intentMenu.putExtras(datos);
                         startActivity(intentMenu);
 
                     }else{
@@ -184,7 +193,13 @@ public class Login extends AppCompatActivity {
 
     private void MainMenu() {
         finish();
+        System.out.println("hola");
         Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle datos = new Bundle();
+        String valor = "true";
+        datos.putString("valor",valor.toString());
+        intent.putExtras(datos);
         startActivity(intent);
     }
 
